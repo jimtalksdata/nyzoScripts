@@ -1,6 +1,8 @@
 # nyzoScripts
 (Unsanctioned) addons for the stock Nyzo verifier. https://github.com/n-y-z-o/nyzoVerifier
 
+Basic commands: https://github.com/jimhsu/nyzoScripts/blob/master/BASICCOMMANDS.md
+
 **Instructions:**
 
 1. Clone to an empty directory (NOT your verifier)
