@@ -12,8 +12,8 @@ sudo apt update && sudo apt install unattended-upgrades -y && sudo apt install n
 
 **View votes**
 
-watch -n 30 sudo java -jar ~/nyzoVerifier/build/libs/nyzoVerifier-1.0.jar co.nyzo.verifier.scripts.NewVerifierTallyStatusRequestScript `cat /var/lib/nyzo/production/verifier_private_seed`
+watch -n 30 sudo java -jar ~/nyzoVerifier/build/libs/nyzoVerifier-1.0.jar co.nyzo.verifier.scripts.NewVerifierTallyStatusRequestScript \`cat /var/lib/nyzo/production/verifier_private_seed\`
 
 **Send a vote**
 
-sudo java -jar ~/nyzoVerifier/build/libs/nyzoVerifier-1.0.jar co.nyzo.verifier.scripts.NewVerifierVoteOverrideRequestScript `cat /var/lib/nyzo/production/verifier_private_seed` VERIFIERTOVOTEFOR
+sudo java -jar ~/nyzoVerifier/build/libs/nyzoVerifier-1.0.jar co.nyzo.verifier.scripts.NewVerifierVoteOverrideRequestScript \`cat /var/lib/nyzo/production/verifier_private_seed\` VERIFIERTOVOTEFOR
