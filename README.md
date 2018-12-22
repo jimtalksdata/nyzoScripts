@@ -1,7 +1,7 @@
 # nyzoScripts
 (Unsanctioned) addons for the stock Nyzo verifier. https://github.com/n-y-z-o/nyzoVerifier
 
-Basic commands: https://github.com/jimhsu/nyzoScripts/blob/master/BASICCOMMANDS.md
+Basic commands: https://github.com/jimtalksdata/nyzoScripts/blob/master/BASICCOMMANDS.md
 
 **Instructions:**
 
