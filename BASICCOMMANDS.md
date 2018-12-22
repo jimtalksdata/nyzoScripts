@@ -1,7 +1,9 @@
 **Supervisor controls**
 
 sudo supervisorctl stop all
+
 sudo supervisorctl reload
+
 sudo supervisorctl tail -f nyzo_verifier
 
 **Bootstrap a new node from root**
