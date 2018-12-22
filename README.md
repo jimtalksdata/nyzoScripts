@@ -11,4 +11,15 @@ Basic commands: https://github.com/jimtalksdata/nyzoScripts/blob/master/BASICCOM
 4. ./gradlew build in the nyzoVerifier directory
 5. Reload the supervisor
 
+**Explanation:**
+
+This project contains code loosely organized into directories. This is as follows:
+- Root: Some MarkDown help files
+- **additional_commands**: Quality of life scripting for the stock nyzo verifier.
+- **lowendsetup**: Scripts and code changes suitable for lower-end / lower-spec systems.
+- **python**: Python scripts for quality of life and convenience.
+- **shell**: Shell scripts for quality of life and convenience.
+
 Disclaimer: I am not responsible if you break your verifier, unintentionally cause a DDoS attack, or lose your place in the cycle. Use with caution.
+
+
