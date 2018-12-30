@@ -17,6 +17,7 @@ This project contains code loosely organized into directories. This is as follow
 - Root: Some MarkDown help files
 - **additional_commands**: Quality of life scripting for the stock nyzo verifier.
 - **lowendsetup**: Scripts and code changes suitable for lower-end / lower-spec systems.
+- **chainstats**: Scripts and code changes used for the nyzo chainstats site.
 - **python**: Python scripts for quality of life and convenience.
 - **shell**: Shell scripts for quality of life and convenience.
 
