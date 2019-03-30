@@ -1,0 +1,50 @@
+#!/bin/bash
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title Frozen block height
+graph_category nyzo
+graph_vlabel height
+graph_info This graph shows the frozen block height for this verifier.
+EOM
+if [ -d "/home/data/nyzo" ]; then
+  cd /home/data/nyzo
+  for dir in */; do
+    echo "${dir%/}".label "${dir%/} height"
+    echo "${dir%/}diff".critical 1:
+    echo "${dir%/}".info "Frozen block height for ${dir%/}."
+  done
+else
+  echo height.label height
+  echo height.critical 1:
+  echo height.info "Frozen block height for this verifier."
+fi
+        exit 0;;
+esac
+
+if [ -d "/home/data/nyzo" ]; then
+  cd /home/data/nyzo
+  for dir in */; do
+    (( v = `grep -s -a freezing $dir/log.txt | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+    echo "${dir%/}.value $v"
+  done
+else
+  printf "height.value "
+  if [ -z `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2` ]; then
+          (( v = 0 ))
+          (( e = `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1`))
+  elif [ -z `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1` ]; then
+          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+          (( e = 0 ))
+  else
+          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+          (( e = `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1`))
+  fi
+  if (( $v > $e )); then
+  echo $v
+  else
+  echo $e
+  fi
+fi
+

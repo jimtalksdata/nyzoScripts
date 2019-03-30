@@ -1,0 +1,55 @@
+#!/bin/bash
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title Block difference from nyzo.co
+graph_category nyzo
+graph_vlabel Difference
+graph_info This graph shows the difference in frozen block height between nyzo.co and this verifier.
+EOM
+if [ -d "/home/data/nyzo" ]; then
+  cd /home/data/nyzo
+  for dir in */; do
+    echo "${dir%/}diff".label "${dir%/} difference"
+    echo "${dir%/}diff".warning -10:100
+    echo "${dir%/}diff".critical -50:
+    echo "${dir%/}diff".info "Height difference between nyzo.co and ${dir%/}."
+  done
+else
+  echo diff.label Difference
+  echo diff.warning -10:100
+  echo diff.critical -50:
+  echo "${dir%/}diff".info "Height difference between nyzo.co and this verifier."
+fi
+        exit 0;;
+esac
+
+(( df = `curl -s https://nyzo.co/cycleInfo | cut -d' ' -f5 | cut -d',' -f1` ))
+if [ -d "/home/data/nyzo" ]; then
+  cd /home/data/nyzo
+  for dir in */; do
+    (( v = `grep -s -a freezing $dir/log.txt | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+    s=$(( $v - $df ))
+    echo "${dir%/}diff.value $s"
+  done
+else
+  printf "diff.value "
+  if [ -z `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2` ]; then
+          (( v = 0 ))
+          (( e = `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1`))
+  elif [ -z `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1` ]; then
+          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+          (( e = 0 ))
+  else
+          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+          (( e = `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1`))
+  fi
+  if (( $v > $e )); then
+  s=$(( $v - $df ))
+  else
+  s=$(( $e - $df ))
+  fi
+  echo $s
+fi
+
