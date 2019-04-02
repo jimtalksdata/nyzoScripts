@@ -23,7 +23,7 @@ This project contains code loosely organized into directories. This is as follow
 
 For advanced users (I will provide no technical support):
 - **docker**: Sample bare-bones docker setup. 
-- **munin**: Sample munin (http://http://munin-monitoring.org/) based monitoring script.
+- **munin**: Sample munin (http://munin-monitoring.org/) based monitoring script.
 
 Disclaimer: I am not responsible if you break your verifier, unintentionally cause a DDoS attack, or lose your place in the cycle. Use with caution.
 
