@@ -35,14 +35,14 @@ if [ -d "/home/data/nyzo" ]; then
   done
 else
   printf "diff.value "
-  if [ -z `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2` ]; then
+  if [ -z `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f2 | cut -d'=' -f2` ]; then
           (( v = 0 ))
           (( e = `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1`))
   elif [ -z `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1` ]; then
-          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f2 | cut -d'=' -f2`))
           (( e = 0 ))
   else
-          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f1 | cut -d'=' -f2`))
+          (( v = `grep -s -a freezing /var/log/nyzo-verifier-stdout.log | tail -1 | cut -d',' -f2 | cut -d'=' -f2`))
           (( e = `grep -s -a froze /var/log/nyzo-sentinel-stdout.log | tail -1 | cut -d'=' -f2 | cut -d',' -f1`))
   fi
   if (( $v > $e )); then
